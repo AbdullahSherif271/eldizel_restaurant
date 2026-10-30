@@ -1,0 +1,21 @@
+.backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, .55); z-index: 1040; animation: fade .2s; }
+.drawer { position: fixed; z-index: 1050; top: 0; bottom: 0; inset-inline-end: 0; width: min(430px, 100%); background: #fff; display: flex; flex-direction: column; animation: slide .3s ease-out; box-shadow: 0 0 40px rgba(0, 0, 0, .4); }
+header { background: var(--black); color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; border-bottom: 4px solid var(--brand);
+  h3 { margin: 0; font-weight: 900; font-size: 1.3rem; } }
+.x { background: transparent; border: 0; color: #fff; font-size: 1.3rem; }
+.body { flex: 1; overflow-y: auto; padding: 1rem 1.25rem; }
+.line { display: flex; gap: .75rem; align-items: center; padding: .75rem 0; border-bottom: 1px dashed #ddd;
+  img { width: 64px; height: 64px; object-fit: contain; background: var(--brand-soft); border-radius: .75rem; }
+  .info { flex: 1; display: flex; flex-direction: column; gap: .2rem; small { color: #777; } }
+  .sum { font-weight: 800; text-align: end; display: flex; flex-direction: column; align-items: flex-end; gap: .4rem; }
+  .del { border: 0; background: transparent; color: #d33; } }
+.qty { display: inline-flex; align-items: center; gap: .6rem; background: var(--brand-soft); border-radius: 99px; padding: .1rem; align-self: flex-start;
+  button { width: 28px; height: 28px; border-radius: 50%; border: 0; background: var(--brand); color: #fff; display: grid; place-items: center; }
+  span { font-weight: 800; min-width: 1.2rem; text-align: center; } }
+footer { padding: 1rem 1.25rem; border-top: 1px solid #eee; }
+.total { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 900; strong { color: var(--brand); } }
+.note { color: #777; display: block; margin-top: .25rem; }
+.summary { background: var(--brand-soft); border-radius: 1rem; padding: .9rem; div { display: flex; justify-content: space-between; font-size: .95rem; } hr { margin: .5rem 0; } }
+.empty { flex: 1; display: grid; place-content: center; text-align: center; gap: .5rem; padding: 2rem; i { font-size: 4rem; color: var(--brand); } }
+@keyframes slide { from { transform: translateX(-100%); } }
+@keyframes fade { from { opacity: 0; } }

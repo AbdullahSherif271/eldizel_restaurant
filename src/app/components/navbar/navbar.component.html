@@ -1,0 +1,18 @@
+<header class="nav">
+  <div class="container inner">
+    <a class="brand" href="#" (click)="$event.preventDefault(); home()">
+      {{ r.name }}
+    </a>
+
+    <img class="logo" [src]="r.logo" [alt]="r.name">
+
+    <form class="search" role="search" (submit)="$event.preventDefault()">
+      <i class="bi bi-search"></i>
+      <input type="search" #q placeholder="ابحث في المنيو..." autocomplete="off" aria-label="بحث"
+             [value]="search.query()" (input)="onInput(q.value)" (keydown.escape)="search.clear()">
+      @if (search.active()) {
+        <button type="button" class="clear" aria-label="مسح" (click)="search.clear(); q.focus()"><i class="bi bi-x-lg"></i></button>
+      }
+    </form>
+  </div>
+</header>

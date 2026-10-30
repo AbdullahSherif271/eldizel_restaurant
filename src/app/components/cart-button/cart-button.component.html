@@ -1,0 +1,7 @@
+<button type="button" id="cart-fab" class="fab" [class.has-items]="cart.count() > 0" (click)="cart.open()" aria-label="السلة">
+  <i class="bi bi-bag-fill"></i>
+  @if (cart.count() > 0) {
+    <span class="count">{{ cart.count() }}</span>
+    <span class="total d-none d-sm-inline">{{ cart.total() }} {{ currency }}</span>
+  }
+</button>

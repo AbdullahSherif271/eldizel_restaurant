@@ -1,0 +1,27 @@
+<footer>
+  <div class="container">
+    <div class="bar">
+      <img class="logo" [src]="r.logo" [alt]="r.name">
+
+      <div class="center">
+        <div class="phones">
+          @for (p of r.phones; track p.number) {
+            <span class="phone">
+              <a [href]="'tel:' + p.number" dir="ltr"><i class="bi bi-telephone-fill"></i>{{ p.number }}</a>
+              @if (p.whatsapp) {
+                <a class="wa" [href]="waLink(p.number)" target="_blank" rel="noopener" aria-label="واتساب"><i class="bi bi-whatsapp"></i></a>
+              }
+            </span>
+          }
+        </div>
+        <p class="address"><i class="bi bi-geo-alt-fill"></i>{{ r.address }}</p>
+      </div>
+
+      <div class="social">
+        @for (s of r.social; track s.name) {
+          <a [href]="s.url" target="_blank" rel="noopener" [attr.aria-label]="s.name"><i [class]="'bi ' + s.icon"></i></a>
+        }
+      </div>
+    </div>
+  </div>
+</footer>

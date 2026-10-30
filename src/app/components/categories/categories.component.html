@@ -1,0 +1,13 @@
+<section class="cats">
+  <div class="container">
+    <h2 class="section-title mb-3">الأقسام</h2>
+    <div class="row-scroll">
+      @for (c of categories; track c.id) {
+        <button type="button" class="cat" [class.active]="active() === c.id" (click)="scrollTo(c.id)">
+          <span class="circle"><img [src]="c.image" [alt]="c.name" loading="lazy" draggable="false"></span>
+          <span class="name">{{ c.name }}</span>
+        </button>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,47 @@
+<article class="card-p" [class.unavailable]="!available()">
+  @if (available() && product().badge) { <span class="badge-p">{{ product().badge }}</span> }
+  <div class="img-wrap">
+    <img [src]="product().image" [alt]="product().name" loading="lazy">
+    @if (!available()) { <span class="sold-out">غير متاح حالياً</span> }
+  </div>
+  <div class="body">
+    <h3>{{ product().name }}</h3>
+    <p>{{ product().description }}</p>
+
+    @if (product().variants; as vs) {
+      <div class="variants">
+        @for (v of vs; track v.id) {
+          <button type="button" class="variant-btn"
+                  [class.active]="v.id === selectedVariant()?.id"
+                  (click)="selectVariant(v.id)">
+            {{ v.label }}
+            <span>{{ v.price }} {{ currency }}</span>
+          </button>
+        }
+      </div>
+    }
+
+    <div class="foot">
+      <div class="price">
+        <strong>{{ effective().price }} {{ currency }}</strong>
+        @if (product().oldPrice) { <del>{{ product().oldPrice }}</del> }
+      </div>
+
+      @if (!available()) {
+        <button type="button" class="btn btn-secondary add" disabled>غير متاح</button>
+      } @else {
+        @if (cart.qtyOf(effective().id); as q) {
+          <div class="qty">
+            <button type="button" (click)="cart.changeQty(effective().id, -1)" aria-label="إنقاص"><i class="bi bi-dash-lg"></i></button>
+            <span>{{ q }}</span>
+            <button type="button" (click)="addToCart($event)" aria-label="زيادة"><i class="bi bi-plus-lg"></i></button>
+          </div>
+        } @else {
+          <button type="button" class="btn btn-brand add" (click)="addToCart($event)">
+            <i class="bi bi-cart-plus"></i><span>أضف<span class="long"> للسلة</span></span>
+          </button>
+        }
+      }
+    </div>
+  </div>
+</article>

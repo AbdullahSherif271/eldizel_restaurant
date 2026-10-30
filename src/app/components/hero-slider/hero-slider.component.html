@@ -1,0 +1,19 @@
+<div class="container hero-wrap">
+  <section class="hero" (mouseenter)="stop()" (mouseleave)="play()"
+           (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)">
+    <div class="track" [class.no-anim]="!animate()" [style.transform]="'translateX(' + pos() * 100 + '%)'"
+         (transitionend)="onTransitionEnd()">
+      @for (s of rendered; track $index) {
+        <div class="slide">
+          <img [src]="s.src" [alt]="s.alt" [attr.loading]="$index === 0 ? 'eager' : 'lazy'" draggable="false">
+        </div>
+      }
+    </div>
+
+    <div class="dots">
+      @for (s of slides; track $index) {
+        <button type="button" [class.active]="$index === current()" [attr.aria-label]="'شريحة ' + ($index + 1)" (click)="go($index)"></button>
+      }
+    </div>
+  </section>
+</div>

@@ -1,0 +1,86 @@
+@if (cart.isOpen()) {
+  <div class="backdrop" (click)="close()"></div>
+  <aside class="drawer" role="dialog" aria-modal="true" aria-label="السلة">
+    <header>
+      <h3>
+        @if (step() === 'cart') { سلتك } @else { تأكيد الطلب }
+      </h3>
+      <button type="button" class="x" (click)="close()" aria-label="إغلاق"><i class="bi bi-x-lg"></i></button>
+    </header>
+
+    @if (empty()) {
+      <div class="empty">
+        <i class="bi bi-bag"></i>
+        <p>السلة فاضية، ضيف أصناف من المنيو</p>
+        <button type="button" class="btn btn-brand" (click)="close()">تصفح المنيو</button>
+      </div>
+    } @else {
+      @if (step() === 'cart') {
+        <div class="body">
+          @for (i of cart.items(); track i.product.id) {
+            <div class="line">
+              <img [src]="i.product.image" [alt]="i.product.name">
+              <div class="info">
+                <strong>{{ i.product.name }}</strong>
+                <small>{{ i.product.price }} {{ currency }}</small>
+                <div class="qty">
+                  <button type="button" (click)="cart.changeQty(i.product.id, -1)" aria-label="إنقاص"><i class="bi bi-dash"></i></button>
+                  <span>{{ i.qty }}</span>
+                  <button type="button" (click)="cart.changeQty(i.product.id, 1)" aria-label="زيادة"><i class="bi bi-plus"></i></button>
+                </div>
+              </div>
+              <div class="sum">
+                {{ i.qty * i.product.price }} {{ currency }}
+                <button type="button" class="del" (click)="cart.remove(i.product.id)" aria-label="حذف"><i class="bi bi-trash3"></i></button>
+              </div>
+            </div>
+          }
+        </div>
+        <footer>
+          <div class="total"><span>الإجمالي</span><strong>{{ cart.total() }} {{ currency }}</strong></div>
+          <small class="note">{{ deliveryNote }}</small>
+          <button type="button" class="btn btn-brand w-100 mt-2" (click)="step.set('checkout')">متابعة</button>
+        </footer>
+      } @else {
+        <form class="body" #f="ngForm" (ngSubmit)="confirm(f.valid)" novalidate>
+          <div class="mb-3">
+            <label class="form-label fw-bold">الاسم</label>
+            <input class="form-control" name="name" #nameCtrl="ngModel" [(ngModel)]="customer.name" required
+                   [class.is-invalid]="submitted() && nameCtrl.invalid">
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">رقم الموبايل</label>
+            <input class="form-control" name="phone" #phoneCtrl="ngModel" inputmode="tel" dir="ltr" [(ngModel)]="customer.phone" required
+                   pattern="^01[0-9]{9}$" placeholder="01xxxxxxxxx"
+                   [class.is-invalid]="submitted() && phoneCtrl.invalid">
+            @if (submitted() && phoneCtrl.invalid) { <div class="invalid-feedback d-block">اكتب رقم موبايل مصري صحيح</div> }
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">العنوان</label>
+            <textarea class="form-control" name="address" #addressCtrl="ngModel" rows="2" [(ngModel)]="customer.address" required
+                      [class.is-invalid]="submitted() && addressCtrl.invalid"></textarea>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">ملاحظات (اختياري)</label>
+            <textarea class="form-control" name="notes" rows="2" [(ngModel)]="customer.notes"></textarea>
+          </div>
+
+          <div class="summary">
+            @for (i of cart.items(); track i.product.id) {
+              <div><span>{{ i.product.name }} × {{ i.qty }}</span><span>{{ i.qty * i.product.price }}</span></div>
+            }
+            <hr>
+            <div class="fw-bold"><span>الإجمالي</span><span>{{ cart.total() }} {{ currency }}</span></div>
+            <small class="note">{{ deliveryNote }}</small>
+          </div>
+
+          <button type="submit" class="btn btn-success w-100 mt-3 py-2 fw-bold">
+            <i class="bi bi-whatsapp ms-1"></i> تأكيد الطلب عبر واتساب
+          </button>
+          <button type="button" class="btn btn-link w-100 text-dark" (click)="step.set('cart')">رجوع للسلة</button>
+          <button type="button" class="btn btn-link w-100 text-secondary btn-sm" (click)="finish()">تم إرسال الطلب - فضّي السلة</button>
+        </form>
+      }
+    }
+  </aside>
+}

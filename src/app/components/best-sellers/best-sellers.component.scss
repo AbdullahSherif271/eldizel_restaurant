@@ -1,0 +1,20 @@
+.bg-soft { background: var(--brand-soft); }
+
+// الأسهم يمين وشمال الكومبوننت نفسه (على الديسكتوب بس، الموبايل بالسحب)
+.wrap { position: relative; @media (min-width: 768px) { padding-inline: 3.5rem; } }
+
+.row-scroll { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; padding: .5rem .25rem 1.25rem; scrollbar-width: none; &::-webkit-scrollbar { display: none; } }
+.item { flex: 0 0 72%; scroll-snap-align: start;
+  @media (min-width: 576px) { flex-basis: 40%; }
+  @media (min-width: 768px) { flex-basis: 30%; }
+  @media (min-width: 992px) { flex-basis: 23%; } }
+
+.arrow {
+  display: none; position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+  width: 46px; height: 46px; border-radius: 50%; border: 0; background: var(--brand); color: #fff; font-size: 1.2rem;
+  place-items: center; box-shadow: 0 6px 16px rgba(244, 83, 2, .4); transition: transform .2s, opacity .2s, background .2s;
+  &:hover { background: var(--black); transform: translateY(-50%) scale(1.08); }
+  &.prev { right: 0; } &.next { left: 0; }
+  &.hide { opacity: 0; pointer-events: none; }
+  @media (min-width: 768px) { display: grid; }
+}

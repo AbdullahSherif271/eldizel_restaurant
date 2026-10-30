@@ -1,0 +1,24 @@
+.spin { background: linear-gradient(135deg, var(--brand) 0%, #ff7a1a 100%); color: #fff; padding: 4rem 0; position: relative; overflow: hidden; }
+.tag { display: inline-block; background: var(--black); padding: .2rem 1rem; border-radius: 99px; font-weight: 800; margin-bottom: .75rem; }
+h2 { font-family: 'Rubik', 'Cairo', sans-serif; font-weight: 900; font-size: clamp(2rem, 6vw, 3.6rem); margin: 0 0 .5rem; text-shadow: 0 4px 0 rgba(0, 0, 0, .2); }
+p { font-size: 1.1rem; opacity: .95; max-width: 32rem; }
+.price { font-size: 2rem; font-weight: 900; margin: 1rem 0; }
+
+// ---- الساندوتش اللي بيلف ----
+.stage { position: relative; display: grid; place-items: center; min-height: 340px; perspective: 900px; }
+.glow { position: absolute; width: 70%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(255, 255, 255, .55), transparent 70%); animation: pulse 4s ease-in-out infinite; }
+.burger {
+  position: relative; width: min(100%, 380px); z-index: 2;
+  filter: drop-shadow(0 25px 18px rgba(0, 0, 0, .35));
+  animation: spin 14s linear infinite, float 3.5s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+.shadow { position: absolute; bottom: 8%; width: 45%; height: 22px; border-radius: 50%; background: rgba(0, 0, 0, .35); filter: blur(10px); animation: shadow 3.5s ease-in-out infinite; }
+
+// بنلف الصورة + ميل بسيط 3D عشان يدي إحساس العمق
+@keyframes spin { from { rotate: 0deg; } to { rotate: 360deg; } }
+@keyframes float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -22px; } }
+@keyframes shadow { 0%, 100% { transform: scale(1); opacity: .5; } 50% { transform: scale(.7); opacity: .25; } }
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+
+@media (prefers-reduced-motion: reduce) { .burger, .glow, .shadow { animation: none; } }

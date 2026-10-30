@@ -1,0 +1,8 @@
+.fab { position: fixed; z-index: 1030; bottom: 1.25rem; left: 1.25rem; display: flex; align-items: center; gap: .6rem;
+  background: var(--black); color: #fff; border: 3px solid var(--brand); border-radius: 99px; height: 60px; min-width: 60px; padding: 0 1.1rem; font-weight: 800; font-size: 1.1rem;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .35); transition: transform .2s; justify-content: center;
+  i { font-size: 1.4rem; color: var(--brand); }
+  &:hover { transform: scale(1.06); }
+  &.has-items { animation: pop .35s; } }
+.count { background: var(--brand); border-radius: 99px; min-width: 26px; height: 26px; display: grid; place-items: center; font-size: .9rem; padding: 0 .35rem; }
+@keyframes pop { 50% { transform: scale(1.12); } }

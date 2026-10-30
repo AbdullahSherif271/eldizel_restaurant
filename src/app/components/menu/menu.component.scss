@@ -1,0 +1,7 @@
+.pills { position: sticky; top: var(--nav-h); z-index: 20; display: flex; gap: .5rem; overflow-x: auto; padding: .75rem 0; margin-bottom: 1rem; background: #fff; scrollbar-width: none; &::-webkit-scrollbar { display: none; }
+  button { flex: 0 0 auto; border: 2px solid var(--brand); background: #fff; color: var(--brand); font-weight: 800; padding: .35rem 1.1rem; border-radius: 99px; transition: all .2s;
+    &:hover { background: var(--brand); color: #fff; } } }
+.group { padding-top: 1.5rem; scroll-margin-top: calc(var(--nav-h) + 4.5rem); }
+.group-title { font-weight: 900; font-size: 1.5rem; margin-bottom: 1rem; padding-inline-start: .75rem; border-inline-start: 6px solid var(--brand); }
+
+.empty { text-align: center; padding: 3rem 1rem; i { font-size: 3.5rem; color: var(--brand); } p { font-weight: 800; font-size: 1.2rem; margin: .5rem 0 1rem; } }

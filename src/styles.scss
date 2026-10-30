@@ -1,0 +1,46 @@
+:root {
+  --brand: #f45302;        // البرتقالي (مأخوذ من الكفر)
+  --brand-dark: #c93f00;
+  --brand-soft: #fff1e8;
+  --black: #111111;
+  --white: #ffffff;
+  --radius: 1.25rem;
+  --nav-h: 112px; // ارتفاع الـ navbar (صفين على الموبايل)
+  --bs-font-sans-serif: 'Cairo', system-ui, sans-serif;
+  --bs-body-font-family: 'Cairo', system-ui, sans-serif;
+  --bs-primary: var(--brand);
+  --bs-primary-rgb: 244, 83, 2;
+}
+
+app-root { display: block; }
+@media (min-width: 768px) { :root { --nav-h: 72px; } }
+
+html { scroll-behavior: smooth; scroll-padding-top: 1rem; }
+body { background: var(--white); color: var(--black); font-family: var(--bs-font-sans-serif); overflow-x: hidden; }
+img { max-width: 100%; }
+
+.btn-brand {
+  --bs-btn-bg: var(--brand); --bs-btn-border-color: var(--brand); --bs-btn-color: #fff;
+  --bs-btn-hover-bg: var(--brand-dark); --bs-btn-hover-border-color: var(--brand-dark); --bs-btn-hover-color: #fff;
+  --bs-btn-active-bg: var(--brand-dark); --bs-btn-active-color: #fff;
+  font-weight: 700; border-radius: 999px; padding: .55rem 1.4rem;
+}
+.btn-outline-brand {
+  --bs-btn-color: var(--brand); --bs-btn-border-color: var(--brand);
+  --bs-btn-hover-bg: var(--brand); --bs-btn-hover-border-color: var(--brand); --bs-btn-hover-color: #fff;
+  font-weight: 700; border-radius: 999px;
+}
+
+.section-title {
+  font-family: 'Rubik', 'Cairo', sans-serif; font-weight: 900; font-size: clamp(1.6rem, 4vw, 2.4rem);
+  margin: 0; position: relative; display: inline-block;
+  &::after { content: ''; display: block; height: 6px; width: 60%; margin-top: .35rem; background: var(--brand); border-radius: 99px; }
+}
+.section-pad { padding: 3rem 0; }
+
+// فرشاة سوداء مقطّعة تفصل بين السيكشنات (زي الكفر)
+.brush-divider {
+  height: 46px; background: var(--black);
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60' preserveAspectRatio='none'><path d='M0 60V28l40-6 50 10 60-14 70 12 80-16 90 14 70-10 90 12 80-14 100 10 70-8 90 12 80-12 90 10 70-8 60 6v40z'/></svg>") center/100% 100% no-repeat;
+          mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60' preserveAspectRatio='none'><path d='M0 60V28l40-6 50 10 60-14 70 12 80-16 90 14 70-10 90 12 80-14 100 10 70-8 90 12 80-12 90 10 70-8 60 6v40z'/></svg>") center/100% 100% no-repeat;
+}
