@@ -1,23 +1,23 @@
-<footer>
+<footer class="ft">
   <div class="container">
-    <div class="bar">
-      <img class="logo" [src]="r.logo" [alt]="r.name">
+    <div class="ft-bar">
+      <img class="ft-logo" [src]="r.logo" [alt]="r.name">
 
-      <div class="center">
-        <div class="phones">
+      <div class="ft-center">
+        <div class="ft-phones">
           @for (p of r.phones; track p.number) {
-            <span class="phone">
+            <span class="ft-phone">
               <a [href]="'tel:' + p.number" dir="ltr"><i class="bi bi-telephone-fill"></i>{{ p.number }}</a>
               @if (p.whatsapp) {
-                <a class="wa" [href]="waLink(p.number)" target="_blank" rel="noopener" aria-label="واتساب"><i class="bi bi-whatsapp"></i></a>
+                <a class="ft-wa" [href]="waLink(p.number)" target="_blank" rel="noopener" aria-label="واتساب"><i class="bi bi-whatsapp"></i></a>
               }
             </span>
           }
         </div>
-        <p class="address"><i class="bi bi-geo-alt-fill"></i>{{ r.address }}</p>
+        <p class="ft-address"><i class="bi bi-geo-alt-fill"></i>{{ r.address }}</p>
       </div>
 
-      <div class="social">
+      <div class="ft-social">
         @for (s of r.social; track s.name) {
           <a [href]="s.url" target="_blank" rel="noopener" [attr.aria-label]="s.name"><i [class]="'bi ' + s.icon"></i></a>
         }

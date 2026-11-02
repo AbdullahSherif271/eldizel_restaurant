@@ -18,6 +18,7 @@ export class CartDrawerComponent {
 
   readonly step = signal<'cart' | 'checkout'>('cart');
   readonly submitted = signal(false);
+  readonly confirmClear = signal(false);
   customer: CustomerInfo = this.loadCustomer();
 
   readonly empty = computed(() => this.cart.items().length === 0);
@@ -26,6 +27,7 @@ export class CartDrawerComponent {
     this.cart.close();
     this.step.set('cart');
     this.submitted.set(false);
+    this.resetClear();
   }
 
   confirm(valid: boolean | null): void {
@@ -33,7 +35,15 @@ export class CartDrawerComponent {
     if (!valid || this.empty()) return;
     this.saveCustomer();
     window.open(this.cart.buildWhatsAppUrl(this.customer), '_blank');
-    // مبنفضيش السلة تلقائي عشان لو الواتساب ماتفتحش العميل ميخسرش طلبه
+  }
+
+  clearAll(): void {
+    this.resetClear();
+    this.cart.clear();
+  }
+
+  private resetClear(): void {
+    this.confirmClear.set(false);
   }
 
   finish(): void {

@@ -5,14 +5,20 @@
     } @else {
       <h2 class="section-title mb-3">المنيو</h2>
     }
+  </div>
 
-    @if (groups().length) {
-      <nav class="pills">
-        @for (g of groups(); track g.id) {
-          <button type="button" (click)="scrollTo(g.id)">{{ g.name }}</button>
-        }
-      </nav>
+  @if (groups().length) {
+    <div class="pills-bar">
+      <div class="container">
+        <nav class="pills">
+          @for (g of groups(); track g.id) {
+            <button type="button" (click)="scrollTo(g.id)">{{ g.name }}</button>
+          }
+        </nav>
+      </div>
+    </div>
 
+    <div class="container">
       @for (g of groups(); track g.id) {
         <div class="group" [id]="'cat-' + g.id">
           <h3 class="group-title">{{ g.name }}</h3>
@@ -23,12 +29,14 @@
           </div>
         </div>
       }
-    } @else {
+    </div>
+  } @else {
+    <div class="container">
       <div class="empty">
         <i class="bi bi-search"></i>
         <p>مفيش نتايج للبحث ده</p>
         <button type="button" class="btn btn-brand" (click)="search.clear()">عرض كل المنيو</button>
       </div>
-    }
-  </div>
+    </div>
+  }
 </section>

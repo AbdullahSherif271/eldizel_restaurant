@@ -1,6 +1,6 @@
 .top {
   position: fixed; z-index: 1030; bottom: 1.25rem; right: 1.25rem; width: 56px; height: 56px; border-radius: 50%;
-  background: var(--brand); color: #fff; border: 3px solid var(--black); font-size: 1.4rem; display: grid; place-items: center;
+  background: var(--brand); color: #fff; border: none; font-size: 1.4rem; display: grid; place-items: center;
   box-shadow: 0 10px 24px rgba(0, 0, 0, .35);
   opacity: 0; visibility: hidden; transform: translateY(20px) scale(.8);
   transition: opacity .3s, transform .3s, visibility .3s, background .2s;

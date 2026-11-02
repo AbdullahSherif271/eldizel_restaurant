@@ -1,20 +1,18 @@
 .hero-wrap { padding-top: 1rem; padding-bottom: .25rem; @media (min-width: 768px) { padding-top: 1.5rem; } }
 
-// جوه container وبحواف دايرية
 .hero {
   position: relative; width: 100%; aspect-ratio: 960 / 365; overflow: hidden; background: #000; border-radius: 1rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, .15); direction: ltr;
   @media (min-width: 768px) { border-radius: 1.75rem; }
 }
 
-// RTL: أول صورة على اليمين، والتالية بتيجي من الشمال ورا الحالية اللي بتتسحب يمين
 .track { display: flex; direction: rtl; height: 100%; transition: transform .6s cubic-bezier(.65, 0, .35, 1); will-change: transform;
   &.no-anim { transition: none; } }
 .slide { flex: 0 0 100%; height: 100%;
   img { width: 100%; height: 100%; object-fit: cover; display: block; user-select: none; } }
 
 .dots {
-  position: absolute; bottom: .6rem; inset-inline: 0; display: flex; justify-content: center; gap: .4rem; z-index: 2;
+  position: absolute; bottom: .6rem; inset-inline: 0; display: flex; justify-content: center; gap: .4rem; z-index: 2; direction: rtl;
   button { width: 10px; height: 10px; border-radius: 99px; border: 0; background: rgba(255, 255, 255, .6); padding: 0; transition: all .3s;
     &.active { width: 28px; background: var(--brand); } }
 }
