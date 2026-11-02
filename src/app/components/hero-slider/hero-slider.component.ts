@@ -10,8 +10,8 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
   // بدّل الصور بصور البانرات الحقيقية لاحقاً
   readonly slides = [
     { src: 'images/cover.png', alt: 'الديزل فرايد تشيكن - أقطم واحكم' },
-    { src: 'images/cover.png', alt: 'عرض 2' },
-    { src: 'images/cover.png', alt: 'عرض 3' },
+    { src: 'images/cover1.jpg', alt: 'سماش برجر' },
+    { src: 'images/cover3.jpg', alt: 'عرض الجمعة البيضاء' },
   ];
   // أول صورة متكررة في الآخر عشان اللف يبقى متصل من غير رجوع للخلف
   readonly rendered = [...this.slides, this.slides[0]];

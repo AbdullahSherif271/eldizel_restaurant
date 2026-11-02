@@ -34,7 +34,7 @@ export const PRODUCTS: Product[] = [
 
   sd('cs2', 'بيج تيستي', 'شرائح بانية متبلة + خس + خيار + مايونيز + صوص تيستي', 90, 145, 'chicken-sandwiches', 'images/dizel1.jpg'),
   sd('cs3', 'بيج فاير', 'شرائح بانية متبلة + خس + مايونيز + هوت صوص + فلفل هالبينو', 90, 145, 'chicken-sandwiches', 'images/fire1.jpg'),
-  sd('cs4', 'تشيكن رانش', 'شرائح بانية متبلة + مايونيز + خيار + خس + صوص رانش', 90, 145, 'chicken-sandwiches', 'images/ranch.jpg'),
+  sd('cs4', 'تشيكن رانش', 'شرائح بانية متبلة + مايونيز + خيار + خس + صوص رانش', 90, 145, 'chicken-sandwiches', 'images/ranch1.jpg'),
   sd('cs5', 'تشيز بارتي', 'شرائح بانية متبلة + خس + خيار + اكسترا شيدر', 90, 145, 'chicken-sandwiches', 'images/cheesy1.jpg'),
 
   // مثال آخر: إضافة مميز لـ بوم
@@ -42,7 +42,7 @@ export const PRODUCTS: Product[] = [
 
   sd('cs7', 'رينجز كينج', 'شرائح بانية متبلة + خس + حلقات بصل + مايونيز + باربيكيو + سلامي', 110, 175, 'chicken-sandwiches', 'images/dizel2.jpg'),
   sd('cs8', 'ستيكس كينج', 'شرائح بانية متبلة + خس + مايونيز + صوص شيدر + موتزاريلا ستيكس', 110, 175, 'chicken-sandwiches', 'images/sticks.jpg'),
-  sd('cs9', 'تورنيدو ديزل', 'شرائح بانية متبلة + خس + خيار + مايونيز + باربيكيو + بيف بيكون', 105, 165, 'chicken-sandwiches', 'images/tornado.jpg'),
+  sd('cs9', 'تورنيدو ديزل', 'شرائح بانية متبلة + خس + خيار + مايونيز + باربيكيو + بيف بيكون', 105, 165, 'chicken-sandwiches', 'images/double.jpg'),
 
   { id: 'cs10', name: 'سموكي ستربس', description: 'شرائح ستربس + خيار + خس + صوص شيدر + باربيكيو + تركي مدخن', price: 120, image: 'images/broast.webp', categoryId: 'chicken-sandwiches' },
   { id: 'cs11', name: 'سوبر بروست', description: 'شرائح بانية دبل + خيار + خس + صوص شيدر + باربيكيو', price: 110, image: 'images/broast1.jpg', categoryId: 'chicken-sandwiches', bestSeller: true, badge: 'مميز' },
@@ -75,7 +75,7 @@ export const PRODUCTS: Product[] = [
   // ===== بوكسات =====
   { id: 'bx2', name: 'ميكس بوكس', description: 'أرز + 2 بانية مشوح + 2 ستربس + بطاطس + صوص شيدر', price: 125, image: 'images/mix-box.jpg', categoryId: 'boxes' },
   { id: 'bx3', name: 'شاورما بوكس', description: 'أرز + شاورما فراخ + بطاطس + صوص شيدر', price: 125, image: 'images/shawerma-box.jpg', categoryId: 'boxes' },
-  { id: 'bx1', name: 'شير بوكس', description: 'أرز + شاورما فراخ + بطاطس + صوص شيدر', price: 180, image: 'images/share.jpg', categoryId: 'boxes' },
+  { id: 'bx1', name: 'شير بوكس', description: '4 ساندوتشات ميني "1 شاورما + 1 سوسيس + 1 فرايد تشيكن + 1 برجر"', price: 180, image: 'images/share.jpg', categoryId: 'boxes', bestSeller: true ,badge: "مميز"},
   // ===== عروض =====
   { id: 'off1', name: 'عرض الشتاء 1', description: '٢ حواوشى لحم بلدى + مخلل + كاتشب', price: 100, image: 'images/offers1.jpg', categoryId: 'offers' },
   { id: 'off2', name: 'عرض الشتاء 2', description: 'سوبر بروست حجم كبير + باكيت بطاطس', price: 100, image: 'images/offers2.jpg', categoryId: 'offers' },
@@ -95,7 +95,7 @@ export const PRODUCTS: Product[] = [
   // ===== كريب فراخ =====
   { id: 'cr1', name: 'كريب بانية فريش', description: ' بانية + جبنة موتزاريلا + طماطم + فلفل + كاتشب + مايونيز', price: 85, image: 'images/baneh-crepe.jpg', categoryId: 'crepe' },
   { id: 'cr2', name: 'كريب زنجر', description: ' زنجر اوريجينال + جبنة موتزاريلا + طماطم + فلفل + كاتشب + مايونيز', price: 85, image: 'images/mix-crepe2.jpg', categoryId: 'crepe', bestSeller: true, badge: 'مميز' },
-  { id: 'cr3', name: 'كريب ستربس', description: ' ستربس سبايسي + جبنة موتزاريلا + طماطم + فلفل + كاتشب + مايونيز', price: 85, image: 'images/mix-crepe3.jpg', categoryId: 'crepe', bestSeller: true, badge: 'مميز' },
+  { id: 'cr3', name: 'كريب ستربس', description: ' ستربس سبايسي + جبنة موتزاريلا + طماطم + فلفل + كاتشب + مايونيز', price: 85, image: 'images/strips.jpg', categoryId: 'crepe', bestSeller: true, badge: 'مميز' },
   { id: 'cr4', name: 'كريب تشيكن باربيكيو', description: ' زنجر اوريجينال + جبنة موتزاريلا + طماطم + فلفل + كاتشب + مايونيز + صوص باربيكيو', price: 90, image: 'images/bar-crepe.jpg', categoryId: 'crepe' },
   { id: 'cr5', name: 'كريب تشيكن رانش', description: ' زنجر اوريجينال + جبنة موتزاريلا + طماطم + فلفل + كاتشب + مايونيز + صوص رانش', price: 90, image: 'images/ranch-crepe.jpg', categoryId: 'crepe', bestSeller: true, badge: 'مميز' },
   { id: 'cr6', name: 'كريب شاورما فراخ', description: ' شاورما فراخ + جبنة موتزاريلا + طماطم + فلفل + كاتشب + مايونيز', price: 95, image: 'images/mix-crepe5.jpg', categoryId: 'crepe', bestSeller: true, badge: 'مميز' },
@@ -126,7 +126,7 @@ export const PRODUCTS: Product[] = [
   { id: 'mx2', name: 'سوبر ميكس', description: 'ستربس + بانية + بطاطس', price: 120, image: 'images/mix-crepe4.jpg', categoryId: 'crepe' },
   { id: 'mx3', name: 'سوبر كرانشي', description: 'ستربس + شيش + سوسيس', price: 120, image: 'images/mix-crepe8.jpg', categoryId: 'crepe' },
   { id: 'mx4', name: 'سوبر كريسبي', description: 'بانية + شاورما فراخ + ستربس', price: 125, image: 'images/crepe2.jpg', categoryId: 'crepe' },
-  { id: 'mx5', name: 'سوبر تشيكن', description: 'بانية + شاورما فراخ + شيش', price: 125, image: 'images/mix-crepe5.jpg', categoryId: 'crepe', bestSeller: true, badge: 'مميز' },
+  { id: 'mx5', name: 'سوبر تشيكن', description: 'بانية + شاورما فراخ + شيش', price: 125, image: 'images/mix-crepe12.jpg', categoryId: 'crepe', bestSeller: true, badge: 'مميز' },
   { id: 'mx6', name: 'سوبر ديزل', description: 'بانية + شاورما فراخ + شيش + هوت دوج', price: 135, image: 'images/mix-crepe.jpg', categoryId: 'crepe', bestSeller: true, badge: 'مميز' },
 
   // ===== ركن السوري =====
@@ -154,24 +154,24 @@ export const PRODUCTS: Product[] = [
   { id: 'ac9', name: 'إضافة موتزاريلا للسوري', description: 'إضافة لساندوتشات السوري', price: 20, image: 'images/mozzarella.jpg', categoryId: 'syrian' },
 
   // ===== إضافات جانبية =====
-  { id: 'sd1', name: 'كلوسلو صغير', description: 'إضافة جانبية', price: 10, image: IMG, categoryId: 'additions' },
-  { id: 'sd2', name: 'كلوسلو كبير', description: 'إضافة جانبية', price: 30, image: IMG, categoryId: 'additions' },
-  { id: 'sd3', name: 'صوص شيدر', description: 'إضافة جانبية', price: 20, image: IMG, categoryId: 'additions' },
-  { id: 'sd4', name: 'باربيكيو', description: 'إضافة جانبية', price: 15, image: IMG, categoryId: 'additions' },
-  { id: 'sd5', name: 'بيج تيستي', description: 'إضافة جانبية', price: 15, image: IMG, categoryId: 'additions' },
-  { id: 'sd6', name: 'رانش', description: 'إضافة جانبية', price: 15, image: IMG, categoryId: 'additions' },
-  { id: 'sd7', name: 'ثاوزاند ايلاند', description: 'إضافة جانبية', price: 15, image: IMG, categoryId: 'additions' },
-  { id: 'sd8', name: 'فلفل هالبينو', description: 'إضافة جانبية', price: 10, image: IMG, categoryId: 'additions' },
-  { id: 'sd9', name: 'هوت صوص', description: 'إضافة جانبية', price: 10, image: IMG, categoryId: 'additions' },
-  { id: 'sd10', name: 'تومية', description: 'إضافة جانبية', price: 10, image: IMG, categoryId: 'additions' },
-  { id: 'sd11', name: 'ريزو', description: 'إضافة جانبية', price: 80, image: IMG, categoryId: 'additions' },
-  { id: 'sd12', name: 'أرز بسمتي صغير', description: 'إضافة جانبية', price: 20, image: IMG, categoryId: 'additions' },
-  { id: 'sd13', name: 'أرز بسمتي كبير', description: 'إضافة جانبية', price: 40, image: IMG, categoryId: 'additions' },
-  { id: 'sd14', name: 'قطعة بروست', description: 'إضافة جانبية', price: 50, image: IMG, categoryId: 'additions' },
-  { id: 'sd15', name: 'قطعة ستربس', description: 'إضافة جانبية', price: 30, image: IMG, categoryId: 'additions' },
-  { id: 'sd16', name: 'بطاطس صغير', description: 'إضافة جانبية', price: 15, image: IMG, categoryId: 'additions' },
-  { id: 'sd17', name: 'بطاطس كبير', description: 'إضافة جانبية', price: 30, image: IMG, categoryId: 'additions' },
-  { id: 'sd18', name: 'موتزاريلا ستيكس', description: 'إضافة جانبية', price: 15, image: IMG, categoryId: 'additions' },
+  { id: 'sd11', name: 'ريزو', description: 'إضافة جانبية', price: 80, image: 'images/rizo.jpg', categoryId: 'additions' },
+  { id: 'sd1', name: 'كلوسلو صغير', description: 'إضافة جانبية', price: 10, image: 'images/clos.jpg', categoryId: 'additions' },
+  // { id: 'sd2', name: 'كلوسلو كبير', description: 'إضافة جانبية', price: 30, image: 'images/clos.jpg', categoryId: 'additions' },
+  { id: 'sd3', name: 'صوص شيدر', description: 'إضافة جانبية', price: 20, image: 'images/gbna.jpg', categoryId: 'additions' },
+  { id: 'sd4', name: 'باربيكيو', description: 'إضافة جانبية', price: 15, image: 'images/bbq.jpg', categoryId: 'additions' },
+  { id: 'sd5', name: 'بيج تيستي', description: 'إضافة جانبية', price: 15, image: 'images/tastys.jpg', categoryId: 'additions' },
+  { id: 'sd6', name: 'رانش', description: 'إضافة جانبية', price: 15, image: 'images/ranchs.jpg', categoryId: 'additions' },
+  { id: 'sd7', name: 'ثاوزاند ايلاند', description: 'إضافة جانبية', price: 15, image: 'images/thousand.jpg', categoryId: 'additions' },
+  { id: 'sd8', name: 'فلفل هالبينو', description: 'إضافة جانبية', price: 10, image: 'images/hal.jpg', categoryId: 'additions' },
+  { id: 'sd9', name: 'هوت صوص', description: 'إضافة جانبية', price: 10, image: 'images/hot.jpg', categoryId: 'additions' },
+  { id: 'sd10', name: 'تومية', description: 'إضافة جانبية', price: 10, image: 'images/tom.jpg', categoryId: 'additions' },
+  { id: 'sd12', name: 'أرز بسمتي صغير', description: 'إضافة جانبية', price: 20, image: 'images/bsmty.jpg', categoryId: 'additions' },
+  // { id: 'sd13', name: 'أرز بسمتي كبير', description: 'إضافة جانبية', price: 40, image: 'images/gbna.jpg', categoryId: 'additions' },
+  { id: 'sd14', name: 'قطعة بروست', description: 'إضافة جانبية', price: 50, image: 'images/broast.jpg', categoryId: 'additions', available: false },
+  { id: 'sd15', name: 'قطعة ستربس', description: 'إضافة جانبية', price: 30, image: 'images/strips1.jpg', categoryId: 'additions' },
+  { id: 'sd16', name: 'بطاطس صغير', description: 'إضافة جانبية', price: 15, image: 'images/potato-packet.jpg', categoryId: 'additions' },
+  // { id: 'sd17', name: 'بطاطس كبير', description: 'إضافة جانبية', price: 30, image: 'images/gbna.jpg', categoryId: 'additions' },
+  { id: 'sd18', name: 'موتزاريلا ستيكس', description: 'إضافة جانبية', price: 15, image: 'images/mozzarilla.jpg', categoryId: 'additions' },
 
   // ===== الحواوشي =====
   { id: 'p13', name: 'حواوشى لحم بلدى', description: '125 جرام لحم بلدى صافى', price: 60, image: 'images/hawawshy-spinner.webp', categoryId: 'new', bestSeller: true, badge: 'جديد' },
