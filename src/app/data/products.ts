@@ -77,6 +77,7 @@ export const PRODUCTS: Product[] = [
   { id: 'bx3', name: 'شاورما بوكس', description: 'أرز + شاورما فراخ + بطاطس + صوص شيدر', price: 125, image: 'images/shawerma-box.jpg', categoryId: 'boxes' },
   { id: 'bx1', name: 'شير بوكس', description: '4 ساندوتشات ميني "1 شاورما + 1 سوسيس + 1 فرايد تشيكن + 1 برجر"', price: 180, image: 'images/share.jpg', categoryId: 'boxes', bestSeller: true ,badge: "مميز"},
   // ===== عروض =====
+  { id: 'off9', name: 'عرض الجمعة البيضاء', description: '3 تشيز برجر سنجل + 3 بطاطس بسعر 2 فقط', price: 180, image: 'images/offers9.jpg', categoryId: 'offers' },
   { id: 'off1', name: 'عرض الشتاء 1', description: '٢ حواوشى لحم بلدى + مخلل + كاتشب', price: 100, image: 'images/offers1.jpg', categoryId: 'offers' },
   { id: 'off2', name: 'عرض الشتاء 2', description: 'سوبر بروست حجم كبير + باكيت بطاطس', price: 100, image: 'images/offers2.jpg', categoryId: 'offers' },
   { id: 'off3', name: 'عرض الشتاء 3', description: 'شاورما سوري + بطاطس سوري + مخلل + كاتشب', price: 100, image: 'images/offers3.jpg', categoryId: 'offers' },
