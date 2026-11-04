@@ -1,8 +1,5 @@
 import { Product } from '../models';
 
-// بيانات تجريبية - الصور كلها test.png والأسعار وهمية
-const IMG = 'images/test.png';
-
 // ساندوتش سنجل/دبل: بيقبل الآن خصائص إضافية اختياريّة (bestseller, badge, etc.)
 const sd = (
   id: string,
@@ -11,8 +8,8 @@ const sd = (
   single: number,
   double: number,
   categoryId: string,
-  image: string = IMG,       // صورة الساندوتش (لو مفيش يستخدم test.png)
-  extra?: Partial<Product>   // خصائص إضافية اختيارية
+  image: string,    
+  extra?: Partial<Product> 
 ): Product => ({
   id,
   name,
