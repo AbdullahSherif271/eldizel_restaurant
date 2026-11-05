@@ -10,5 +10,5 @@ export const CATEGORIES: Category[] = [
   { id: 'crepe', name: 'كريب', image: 'images/shwerma-crepe.webp' },
   { id: 'syrian', name: 'ساندوتشات سورى', image: 'images/syrian-shawerma.webp' },
   { id: 'potato', name: 'ركن البطاطس', image: 'images/fries.webp' },
-  { id: 'additions', name: 'إضافات', image: 'images/fries.png' },
+  { id: 'additions', name: 'إضافات', image: 'images/friess.png' },
 ];

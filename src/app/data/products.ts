@@ -152,7 +152,7 @@ export const PRODUCTS: Product[] = [
   { id: 'ac9', name: 'إضافة موتزاريلا للسوري', description: 'إضافة لساندوتشات السوري', price: 20, image: 'images/mozzarella.jpg', categoryId: 'syrian' },
 
   // ===== إضافات جانبية =====
-  { id: 'sd11', name: 'ريزو', description: 'إضافة جانبية', price: 80, image: 'images/rizo.jpg', categoryId: 'additions' },
+  { id: 'sd11', name: 'ريزو', description: 'رز ابيض بتتبيلة خاصة مضاف عليه قطع ستربس + صوص باربيكيو', price: 80, image: 'images/rizo.jpg', categoryId: 'additions' },
   { id: 'sd1', name: 'كلوسلو صغير', description: 'إضافة جانبية', price: 10, image: 'images/clos.jpg', categoryId: 'additions' },
   // { id: 'sd2', name: 'كلوسلو كبير', description: 'إضافة جانبية', price: 30, image: 'images/clos.jpg', categoryId: 'additions' },
   { id: 'sd3', name: 'صوص شيدر', description: 'إضافة جانبية', price: 20, image: 'images/gbna.jpg', categoryId: 'additions' },

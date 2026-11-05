@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../services/cart.service';
-import { RESTAURANT } from '../../config';
+import { RESTAURANT, DELIVERY_AREAS } from '../../config';
 import { CustomerInfo } from '../../models';
 
 @Component({
@@ -15,6 +15,7 @@ export class CartDrawerComponent {
   readonly cart = inject(CartService);
   readonly currency = RESTAURANT.currency;
   readonly deliveryNote = RESTAURANT.deliveryNote;
+  readonly areas = DELIVERY_AREAS;
 
   readonly step = signal<'cart' | 'checkout'>('cart');
   readonly submitted = signal(false);
@@ -32,9 +33,11 @@ export class CartDrawerComponent {
 
   confirm(valid: boolean | null): void {
     this.submitted.set(true);
-    if (!valid || this.empty()) return;
+    if (!valid || this.empty() || !this.cart.area()) return;
     this.saveCustomer();
     window.open(this.cart.buildWhatsAppUrl(this.customer), '_blank');
+    this.cart.clear();
+    this.close();
   }
 
   clearAll(): void {
@@ -44,11 +47,6 @@ export class CartDrawerComponent {
 
   private resetClear(): void {
     this.confirmClear.set(false);
-  }
-
-  finish(): void {
-    this.cart.clear();
-    this.close();
   }
 
   private loadCustomer(): CustomerInfo {
