@@ -1,13 +1,51 @@
-<section class="cats">
-  <div class="container">
-    <h2 class="section-title mb-3">الأقسام</h2>
-    <div class="row-scroll">
-      @for (c of categories; track c.id) {
-        <button type="button" class="cat" [class.active]="active() === c.id" (click)="scrollTo(c.id)">
-          <span class="circle"><img [src]="c.image" [alt]="c.name" loading="lazy" draggable="false"></span>
-          <span class="name">{{ c.name }}</span>
-        </button>
-      }
+<div class="container pt-4">
+  <h2 class="section-title mb-3">الأقسام</h2>
+</div>
+
+<!-- علامة مكان الشريط الطبيعي (بنعرف منها إمتى الشريط يثبت) -->
+<div #sentinel class="sentinel"></div>
+<!-- شريط واحد: حجمه بيتحكم فيه --p (من 0 لـ 1) حسب السكرول -->
+<div #bar class="bar position-sticky pe-none">
+  <div class="bar-in bg-white pe-auto pt-2 pt-3">
+    <div class="container">
+      <div class="row-scroll d-flex flex-nowrap overflow-x-auto px-2" #row>
+        @for (c of categories; track c.id) {
+          <button type="button"
+                  class="cat d-flex flex-column align-items-center flex-shrink-0 border-0 bg-transparent p-0 fw-bolder"
+                  [class.active]="!search.active() && active() === c.id"
+                  [attr.aria-pressed]="!search.active() && active() === c.id"
+                  (click)="pick(c.id, $event)">
+            <span class="circle ratio ratio-1x1 d-block rounded-circle overflow-hidden">
+              <img class="w-100 h-100 object-fit-cover" [src]="c.image" [alt]="c.name" loading="lazy" draggable="false">
+            </span>
+            <span class="name position-relative fw-bolder text-nowrap">{{ c.name }}</span>
+          </button>
+        }
+      </div>
     </div>
   </div>
-</section>
+</div>
+
+<!-- منتجات القسم المفتوح (id="menu" عشان أي لينك #menu يفضل شغال) -->
+<div class="container products" id="menu">
+  @if (search.active()) {
+    <h2 class="section-title mb-3">نتائج البحث عن "{{ search.query() }}"</h2>
+  }
+
+  @for (g of visible(); track g.id) {
+    <div class="pt-3">
+      <h3 class="group-title fw-bolder fs-3 mb-3 pt-3">{{ g.name }}</h3>
+      <div class="row g-3 g-md-4">
+        @for (p of g.products; track p.id) {
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3"><app-product-card [product]="p" [rowOnMobile]="true" /></div>
+        }
+      </div>
+    </div>
+  } @empty {
+    <div class="empty text-center py-5 px-3">
+      <i class="bi bi-search display-3"></i>
+      <p class="fw-bolder fs-5 mt-2 mb-3">صنف غير موجود</p>
+      <button type="button" class="btn btn-brand" (click)="search.clear()">عرض كل المنيو</button>
+    </div>
+  }
+</div>

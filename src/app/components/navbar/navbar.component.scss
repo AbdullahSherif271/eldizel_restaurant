@@ -104,10 +104,6 @@ $wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox
     flex-direction: row;
     justify-content: flex-start;
   }
-
-  &:hover {
-    transform: scale(1.02);
-  }
 }
 
 .nb-name {
@@ -150,7 +146,6 @@ $wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox
 
   &:focus-within {
     transform: translateY(-1px);
-    box-shadow: 0 0 0 4px rgba(255, 255, 255, .4), 0 10px 24px rgba(0, 0, 0, .22);
   }
 
   >i {

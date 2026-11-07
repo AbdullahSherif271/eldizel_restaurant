@@ -5,7 +5,6 @@ import { HeroSliderComponent } from './components/hero-slider/hero-slider.compon
 import { CategoriesComponent } from './components/categories/categories.component';
 import { BestSellersComponent } from './components/best-sellers/best-sellers.component';
 import { SpinSectionComponent } from './components/spin-section/spin-section.component';
-import { MenuComponent } from './components/menu/menu.component';
 import { CartButtonComponent } from './components/cart-button/cart-button.component';
 import { CartDrawerComponent } from './components/cart-drawer/cart-drawer.component';
 import { ScrollTopComponent } from './components/scroll-top/scroll-top.component';
@@ -16,7 +15,7 @@ import { FooterComponent } from './components/footer/footer.component';
   standalone: true,
   imports: [
     NavbarComponent, HeroSliderComponent, CategoriesComponent, BestSellersComponent, SpinSectionComponent,
-    MenuComponent, CartButtonComponent, CartDrawerComponent, FooterComponent, ScrollTopComponent,
+    CartButtonComponent, CartDrawerComponent, FooterComponent, ScrollTopComponent,
   ],
   templateUrl: './app.component.html',
 })

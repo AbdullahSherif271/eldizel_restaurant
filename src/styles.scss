@@ -1,7 +1,7 @@
 :root {
-  --brand: #f45302;        // البرتقالي (مأخوذ من الكفر)
+  --brand: #f45302;
   --brand-dark: #c93f00;
-  --brand-soft: #fff1e8;
+  --brand-soft: #ffedd5;
   --black: #111111;
   --white: #ffffff;
   --radius: 1.25rem;
@@ -15,7 +15,7 @@
 app-root { display: block; }
 @media (min-width: 768px) { :root { --nav-h: 72px; } }
 
-html { scroll-behavior: smooth; scroll-padding-top: 1rem; }
+html { scroll-behavior: smooth; scroll-padding-top: 1rem; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 body { background: var(--white); color: var(--black); font-family: var(--bs-font-sans-serif); overflow-x: hidden; }
 img { max-width: 100%; }
 
