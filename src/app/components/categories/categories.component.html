@@ -4,8 +4,8 @@
 
 <!-- علامة مكان الشريط الطبيعي (بنعرف منها إمتى الشريط يثبت) -->
 <div #sentinel class="sentinel"></div>
-<!-- شريط واحد: حجمه بيتحكم فيه --p (من 0 لـ 1) حسب السكرول -->
-<div #bar class="bar position-sticky pe-none">
+<!-- شريط واحد: حالتين بس (كبير / صغير) والانتقال بينهم بـ CSS transition -->
+<div class="bar position-sticky pe-none" [class.compact]="compact()">
   <div class="bar-in bg-white pe-auto pt-2 pt-3">
     <div class="container">
       <div class="row-scroll d-flex flex-nowrap overflow-x-auto px-2" #row>

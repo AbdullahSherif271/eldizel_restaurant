@@ -15,12 +15,15 @@ export class CategoriesComponent {
   readonly search = inject(SearchService);
   readonly categories = CATEGORIES;
   readonly active = signal(CATEGORIES[0].id);
-  private readonly RANGE = 140;
+  /** true = الشريط ثابت وصغير */
+  readonly compact = signal(false);
+  private readonly DURATION = 350; // لازم يساوي --dur في الـ SCSS
+  private raf = 0;
 
   private readonly sentinel = viewChild.required<ElementRef<HTMLElement>>('sentinel');
-  private readonly bar = viewChild.required<ElementRef<HTMLElement>>('bar');
   private readonly row = viewChild.required<ElementRef<HTMLElement>>('row');
   private readonly destroyRef = inject(DestroyRef);
+
   readonly visible = computed(() => {
     const searching = this.search.active();
     return CATEGORIES
@@ -31,40 +34,39 @@ export class CategoriesComponent {
 
   constructor() {
     afterNextRender(() => {
-      let navH = this.readNavH();
-      let last = -1;
-      let ticking = false;
+      let io: IntersectionObserver | undefined;
+      const rowEl = this.row().nativeElement;
+      // لو المستخدم مسك الشريط بإيده نوقف التوسيط التلقائي عشان منتخانقش معاه
+      const stop = () => cancelAnimationFrame(this.raf);
 
-      // بيحسب نسبة التصغير (0 = كبير، 1 = صغير) ويكتبها على الشريط كـ CSS variable
-      const apply = () => {
-        ticking = false;
-        const top = this.sentinel().nativeElement.getBoundingClientRect().top;
-        const p = Math.min(1, Math.max(0, (navH - top) / this.RANGE));
-        if (p === last) return;
-        last = p;
-        this.bar().nativeElement.style.setProperty('--p', p.toFixed(3));
-        this.centerActive(); // بس وقت ما الحجم بيتغير فعلاً
+      const observe = () => {
+        io?.disconnect();
+        const navH = this.readNavH();
+        io = new IntersectionObserver(
+          ([e]) => {
+            // العلامة عدّت تحت الناف بار => الشريط ثبت => صغّر
+            const next = !e.isIntersecting && e.boundingClientRect.top < navH;
+            if (next === this.compact()) return;
+            this.compact.set(next);
+            // نثبّت مكان الدايرة المفتوحة طول مدة الانتقال
+            this.chase(this.DURATION + 100);
+          },
+          { rootMargin: `-${navH}px 0px 0px 0px` },
+        );
+        io.observe(this.sentinel().nativeElement);
       };
 
-      // مرة واحدة كل فريم بدل كل حدث سكرول
-      const onScroll = () => {
-        if (!ticking) {
-          ticking = true;
-          requestAnimationFrame(apply);
-        }
-      };
-      const onResize = () => {
-        navH = this.readNavH();
-        apply();
-      };
-
-      apply();
+      observe();
       this.centerActive();
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', onResize);
+      window.addEventListener('resize', observe);
+      rowEl.addEventListener('pointerdown', stop, { passive: true });
+      rowEl.addEventListener('wheel', stop, { passive: true });
       this.destroyRef.onDestroy(() => {
-        window.removeEventListener('scroll', onScroll);
-        window.removeEventListener('resize', onResize);
+        io?.disconnect();
+        cancelAnimationFrame(this.raf);
+        window.removeEventListener('resize', observe);
+        rowEl.removeEventListener('pointerdown', stop);
+        rowEl.removeEventListener('wheel', stop);
       });
     });
   }
@@ -73,7 +75,8 @@ export class CategoriesComponent {
   pick(id: string, ev: Event): void {
     this.search.clear();
     this.active.set(id);
-    this.centerActive(ev.currentTarget as HTMLElement, 'smooth');
+    // بنتابع الزرار اللي اتداس عليه نفسه (الكلاس active لسه ماتحطش على الـ DOM)
+    this.chase(1000, ev.currentTarget as HTMLElement, true);
     document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
@@ -82,13 +85,38 @@ export class CategoriesComponent {
     return parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 0;
   }
 
-  /** يحرك الشريط أفقياً لحد ما الدايرة المفتوحة تبقى في النص */
-  private centerActive(el?: HTMLElement | null, behavior: ScrollBehavior = 'instant'): void {
+  /** المسافة الأفقية بين الدايرة المفتوحة ونص الشريط */
+  private offset(el?: HTMLElement | null): number {
     const row = this.row().nativeElement;
     const btn = el ?? row.querySelector<HTMLElement>('.cat.active');
-    if (!btn) return;
+    if (!btn) return 0;
     const r = row.getBoundingClientRect();
     const b = btn.getBoundingClientRect();
-    row.scrollBy({ left: b.left + b.width / 2 - (r.left + r.width / 2), behavior });
+    return b.left + b.width / 2 - (r.left + r.width / 2);
+  }
+
+  /** توسيط فوري (للتحميل الأول بس) */
+  private centerActive(): void {
+    this.row().nativeElement.scrollBy({ left: this.offset(), behavior: 'instant' });
+  }
+
+  /**
+   * بيثبّت مكان الدايرة المفتوحة على الشاشة لمدة `ms` وهي بتصغر/تكبر:
+   *  - كل فريم بنحسب قد إيه الدايرة اتزحزحت بسبب تغيّر الأحجام ونلغي الزحزحة دي بالكامل (من غير تأخير).
+   *  - لو `settle` = true، بنقرّب كمان الدايرة من نص الشريط تدريجياً (وقت اختيار قسم).
+   */
+  private chase(ms: number, el?: HTMLElement | null, settle = false): void {
+    cancelAnimationFrame(this.raf);
+    const row = this.row().nativeElement;
+    const end = performance.now() + ms;
+    let prev = this.offset(el);
+    const step = () => {
+      const drift = this.offset(el) - prev;
+      const move = drift + (settle ? prev * 0.2 : 0);
+      if (Math.abs(move) >= 0.5) row.scrollBy({ left: move, behavior: 'instant' });
+      prev = this.offset(el);
+      if (performance.now() < end) this.raf = requestAnimationFrame(step);
+    };
+    this.raf = requestAnimationFrame(step);
   }
 }
