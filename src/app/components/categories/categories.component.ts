@@ -40,37 +40,42 @@ export class CategoriesComponent {
 
   constructor() {
     afterNextRender(() => {
-      let io: IntersectionObserver | undefined;
       const rowEl = this.row().nativeElement;
-      // لو المستخدم مسك الشريط بإيده نوقف التوسيط التلقائي عشان منتخانقش معاه
+      const sentinelEl = this.sentinel().nativeElement;
+      let navH = this.readNavH();
+      let ticking = false;
       const stop = () => this.stopChase();
 
-      const observe = () => {
-        io?.disconnect();
-        const navH = this.readNavH();
-        io = new IntersectionObserver(
-          ([e]) => {
-            // العلامة عدّت تحت الناف بار => الشريط ثبت => صغّر
-            const next = !e.isIntersecting && e.boundingClientRect.top < navH;
-            if (next === this.compact()) return;
-            this.compact.set(next);
-            // نثبّت مكان الدايرة المفتوحة طول مدة الانتقال
-            this.chase(this.DURATION + 100);
-          },
-          { rootMargin: `-${navH}px 0px 0px 0px` },
-        );
-        io.observe(this.sentinel().nativeElement);
+      // hysteresis: بيصغر لما العلامة تعدّي الناف بار، ومبيكبرش غير لما ترجع تبعد عنه شوية.
+      // كده مفيش قلب true/false رايح جاي لو الـ scroll واقف جنب الحد.
+      const update = () => {
+        ticking = false;
+        const top = sentinelEl.getBoundingClientRect().top;
+        const next = this.compact() ? top < navH + 40 : top < navH - 1;
+        if (next === this.compact()) return;
+        this.compact.set(next);
+        this.chase(this.DURATION + 100);
+      };
+      const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(update);
+      };
+      const onResize = () => {
+        navH = this.readNavH();
+        update();
       };
 
-      observe();
+      update();
       this.centerActive();
-      window.addEventListener('resize', observe);
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onResize);
       rowEl.addEventListener('pointerdown', stop, { passive: true });
       rowEl.addEventListener('wheel', stop, { passive: true });
       this.destroyRef.onDestroy(() => {
-        io?.disconnect();
         this.stopChase();
-        window.removeEventListener('resize', observe);
+        window.removeEventListener('scroll', onScroll);
+        window.removeEventListener('resize', onResize);
         rowEl.removeEventListener('pointerdown', stop);
         rowEl.removeEventListener('wheel', stop);
       });
