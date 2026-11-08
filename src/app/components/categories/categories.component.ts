@@ -18,7 +18,13 @@ export class CategoriesComponent {
   /** true = الشريط ثابت وصغير */
   readonly compact = signal(false);
   private readonly DURATION = 350; // لازم يساوي --dur في الـ SCSS
-  private raf = 0;
+
+  // ===== حالة لوب التتبع (لوب واحد بس شغال في أي وقت) =====
+  private raf = 0; // 0 = اللوب واقف
+  private end = 0; // وقت نهاية اللوب
+  private goal = 0; // الإزاحة المطلوبة للدايرة عن نص الشريط
+  private decay = false; // true = الهدف بيقرب من صفر (نص الشريط) تدريجياً
+  private target: HTMLElement | null = null; // الزرار اللي بنتابعه (null = الزرار المفتوح)
 
   private readonly sentinel = viewChild.required<ElementRef<HTMLElement>>('sentinel');
   private readonly row = viewChild.required<ElementRef<HTMLElement>>('row');
@@ -37,7 +43,7 @@ export class CategoriesComponent {
       let io: IntersectionObserver | undefined;
       const rowEl = this.row().nativeElement;
       // لو المستخدم مسك الشريط بإيده نوقف التوسيط التلقائي عشان منتخانقش معاه
-      const stop = () => cancelAnimationFrame(this.raf);
+      const stop = () => this.stopChase();
 
       const observe = () => {
         io?.disconnect();
@@ -63,7 +69,7 @@ export class CategoriesComponent {
       rowEl.addEventListener('wheel', stop, { passive: true });
       this.destroyRef.onDestroy(() => {
         io?.disconnect();
-        cancelAnimationFrame(this.raf);
+        this.stopChase();
         window.removeEventListener('resize', observe);
         rowEl.removeEventListener('pointerdown', stop);
         rowEl.removeEventListener('wheel', stop);
@@ -100,22 +106,42 @@ export class CategoriesComponent {
     this.row().nativeElement.scrollBy({ left: this.offset(), behavior: 'instant' });
   }
 
+  private stopChase(): void {
+    cancelAnimationFrame(this.raf);
+    this.raf = 0;
+    this.end = 0;
+  }
+
   /**
-   * بيثبّت مكان الدايرة المفتوحة على الشاشة لمدة `ms` وهي بتصغر/تكبر:
-   *  - كل فريم بنحسب قد إيه الدايرة اتزحزحت بسبب تغيّر الأحجام ونلغي الزحزحة دي بالكامل (من غير تأخير).
-   *  - لو `settle` = true، بنقرّب كمان الدايرة من نص الشريط تدريجياً (وقت اختيار قسم).
+   * لوب واحد بيخلي إزاحة الدايرة عن نص الشريط = `goal` في كل فريم.
+   * بنقيس الخطأ المطلق (الإزاحة الحالية - الهدف) مش الفرق عن الفريم اللي فات،
+   * فمفيش feedback loop ومفيش رعشة.
+   *  - من غير `settle`: الهدف = مكان الدايرة وقت البداية (تثبيت أثناء تصغير/تكبير الشريط).
+   *  - مع `settle`: الهدف بيقرب من صفر تدريجياً (توسيط الدايرة وقت اختيار قسم).
+   * لو اللوب شغال أصلاً (مثلاً الشريط صغر وإحنا في نص اختيار قسم) بنمدّ وقته بس
+   * ومنبدأش لوب جديد، عشان الهدف ماينعملوش reset.
    */
   private chase(ms: number, el?: HTMLElement | null, settle = false): void {
-    cancelAnimationFrame(this.raf);
+    this.end = Math.max(this.end, performance.now() + ms);
+
+    if (settle) {
+      this.target = el ?? null;
+      this.goal = this.offset(this.target);
+      this.decay = true;
+    } else if (!this.raf) {
+      this.target = null;
+      this.goal = this.offset();
+      this.decay = false;
+    }
+
+    if (this.raf) return;
+
     const row = this.row().nativeElement;
-    const end = performance.now() + ms;
-    let prev = this.offset(el);
     const step = () => {
-      const drift = this.offset(el) - prev;
-      const move = drift + (settle ? prev * 0.2 : 0);
-      if (Math.abs(move) >= 0.5) row.scrollBy({ left: move, behavior: 'instant' });
-      prev = this.offset(el);
-      if (performance.now() < end) this.raf = requestAnimationFrame(step);
+      if (this.decay) this.goal *= 0.85;
+      const err = this.offset(this.target) - this.goal;
+      if (Math.abs(err) >= 0.5) row.scrollBy({ left: err, behavior: 'instant' });
+      this.raf = performance.now() < this.end ? requestAnimationFrame(step) : 0;
     };
     this.raf = requestAnimationFrame(step);
   }
