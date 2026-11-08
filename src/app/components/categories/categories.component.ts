@@ -54,7 +54,6 @@ export class CategoriesComponent {
         const next = this.compact() ? top < navH + 40 : top < navH - 1;
         if (next === this.compact()) return;
         this.compact.set(next);
-        this.chase(this.DURATION + 100);
       };
       const onScroll = () => {
         if (ticking) return;

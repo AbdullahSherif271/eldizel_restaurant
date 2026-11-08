@@ -2,7 +2,8 @@
 // هنا بس اللي مفيش له utility: حالتين للشريط (كبير / صغير) وألوان البراند.
 
 :host {
-  display: contents;
+  display: block;
+  min-height: calc(var(--c) + 90px);
 }
 
 .sentinel {
@@ -28,10 +29,12 @@
   --name-pb: .35rem;
   --lift: -6px;
 
+  position: sticky;
   top: var(--nav-h);
   z-index: 20;
   // الارتفاع ثابت دايماً عشان الصفحة ماتتحركش تحت إيدك
   height: calc(var(--c) + 90px);
+  transition: height var(--dur) var(--ease);
 
   @media (min-width: 768px) {
     --c: 140px;
