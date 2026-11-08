@@ -86,8 +86,18 @@ export class CategoriesComponent {
   pick(id: string, ev: Event): void {
     this.search.clear();
     this.active.set(id);
-    // بنتابع الزرار اللي اتداس عليه نفسه (الكلاس active لسه ماتحطش على الـ DOM)
-    this.chase(1000, ev.currentTarget as HTMLElement, true);
+    
+    const btn = ev.currentTarget as HTMLElement;
+    const rowEl = this.row().nativeElement;
+
+    // توسيط أفقي سلس ومباشر للزرار جوه الـ row من غير ركض فريمات معقد
+    const rowRect = rowEl.getBoundingClientRect();
+    const btnRect = btn.getBoundingClientRect();
+    const scrollTarget = rowEl.scrollLeft + (btnRect.left - rowRect.left) - (rowRect.width / 2) + (btnRect.width / 2);
+    
+    rowEl.scrollTo({ left: scrollTarget, behavior: 'smooth' });
+
+    // النزول لقائمة المنتجات تحت
     document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
